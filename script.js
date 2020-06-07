@@ -2,10 +2,26 @@ alert("Welcome to Whack-a-Mole. Your goal is to whack as many moles as you can w
 
 var loopsCompleted = 0;
 var countDown = 31;
-var button = document.querySelector('button').addEventListener("click", start);
+var selectMole;
+
+document.querySelector('#startbutton').addEventListener("click", start);
+document.querySelector("#refreshbutton").addEventListener("click", restartGame);
+document.querySelector('#mole1').addEventListener("click", addPoint);
+document.querySelector('#mole2').addEventListener("click", addPoint);
+document.querySelector('#mole3').addEventListener("click", addPoint);
+document.querySelector('#mole4').addEventListener("click", addPoint);
+document.querySelector('#mole5').addEventListener("click", addPoint);
+document.querySelector('#mole6').addEventListener("click", addPoint);
+document.querySelector('#mole7').addEventListener("click", addPoint);
+document.querySelector('#mole8').addEventListener("click", addPoint);
+document.querySelector('#mole0').addEventListener("click", addPoint);
+
+function hideOnClick() {
+    alert("youclicked");
+}
 
 function start() {
-    document.querySelector('button').disabled = true;
+    document.querySelector('#startbutton').disabled = true;
     counter();
     showHideLoop();
 }
@@ -16,7 +32,8 @@ function counter() {
 
     if (countDown <= 0) {
         var hitRate = ((score / loopsCompleted) * 100)
-        alert("Time's up! You hit " + score + " moles with an accuracy of " + hitRate + "%. Refresh the page to try again");
+        alert("Time's up! You hit " + score + " moles with an accuracy of " + hitRate + "%. Hit the 'Restart Game' button to try again.");
+        document.querySelector("#refreshbutton").style.display = "block";
 
     } else if (countDown <= 10) {
         document.getElementById("counter").className = "counter2";
@@ -34,8 +51,11 @@ function showHideLoop() {
     function showMole() {
         document.getElementById(`mole${selectMole}`).style.visibility = "visible";
     }
+
     loopsCompleted = loopsCompleted + 1;
+
     var randomDelay = Math.floor(Math.random() * 1000);
+
     setTimeout(hideMole, randomDelay);
 
     function hideMole() {
@@ -44,11 +64,9 @@ function showHideLoop() {
         if (countDown <= 0) {
             return;
         } else {
-
             showHideLoop();
         }
     }
-
 }
 
 var score = 0;
@@ -57,5 +75,12 @@ function addPoint() {
     score = score + 1;
     document.getElementById("score").innerHTML = score;
 
+    for (i = 0; i < 9; i++) {
+        document.getElementById(`mole${i}`).style.visibility = "hidden";
+    }
+}
+
+function restartGame() {
+    location.reload();
 }
 
