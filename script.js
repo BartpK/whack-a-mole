@@ -1,4 +1,4 @@
-alert("Welcome to Whack-a-Mole. Your goal is to whack as many moles as you can within 30 seconds. The timer starts when you hit 'Start'. Good luck!");
+alert("Welcome to Whack-a-Mole. Your goal is to whack as many moles as you can within 30 seconds. The timer starts when you hit 'Start'. Best of luck!");
 
 var loopsCompleted = 0;
 var countDown = 31;
